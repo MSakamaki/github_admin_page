@@ -15,7 +15,6 @@ module.exports = function (grunt) {
       },
       src: ['**']
     },
-    // Watches files for changes and runs tasks based on the changed files
     watch: {
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
@@ -80,8 +79,6 @@ module.exports = function (grunt) {
         }
       }
     },
-
-    // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
       options: {
         jshintrc: '.jshintrc',
@@ -98,8 +95,6 @@ module.exports = function (grunt) {
         src: ['test/spec/{,*/}*.js']
       }
     },
-
-    // Empties folders to start fresh
     clean: {
       dist: {
         files: [{
@@ -128,8 +123,6 @@ module.exports = function (grunt) {
         }]
       }
     },
-
-    // Automatically inject Bower components into the app
     'bower-install': {
       app: {
         html: '<%= yeoman.app %>/index.html',
@@ -169,7 +162,6 @@ module.exports = function (grunt) {
     //   }
     // },
 
-    // Renames files for browser caching purposes
     rev: {
       dist: {
         files: {
@@ -182,18 +174,12 @@ module.exports = function (grunt) {
         }
       }
     },
-
-    // Reads HTML for usemin blocks to enable smart builds that automatically
-    // concat, minify and revision files. Creates configurations in memory so
-    // additional tasks can operate on them
     useminPrepare: {
       html: '<%= yeoman.app %>/index.html',
       options: {
         dest: '<%= yeoman.dist %>'
       }
     },
-
-    // Performs rewrites based on rev and the useminPrepare configuration
     usemin: {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
@@ -201,8 +187,6 @@ module.exports = function (grunt) {
         assetsDirs: ['<%= yeoman.dist %>']
       }
     },
-
-    // The following *-min tasks produce minified files in the dist folder
     imagemin: {
       dist: {
         files: [{
@@ -239,9 +223,6 @@ module.exports = function (grunt) {
         }]
       }
     },
-
-    // Allow the use of non-minsafe AngularJS files. Automatically makes it
-    // minsafe compatible so Uglify does not destroy the ng references
     ngmin: {
       dist: {
         files: [{
@@ -252,15 +233,11 @@ module.exports = function (grunt) {
         }]
       }
     },
-
-    // Replace Google CDN references
     cdnify: {
       dist: {
         html: ['<%= yeoman.dist %>/*.html']
       }
     },
-
-    // Copies remaining files to places other tasks can use
     copy: {
       dist: {
         files: [{
@@ -291,8 +268,6 @@ module.exports = function (grunt) {
         src: '{,*/}*.css'
       }
     },
-
-    // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
         //'compass:server'
@@ -385,7 +360,8 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'gh-pages'
   ]);
 
   grunt.registerTask('default', [

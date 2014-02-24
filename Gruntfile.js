@@ -26,14 +26,9 @@ module.exports = function (grunt) {
     },
     'gh-pages': {
       options: {
-        base: 'dist',
+        base: 'dist/',
         dotfiles: true,
-        repo: 'https://github.com/MSakamaki/github_admin_page.git',
-        message: 'Auto-generated commit',
-        user: {
-          name: 'MSakamaki',
-          email: 'm.sakamaki@yamada3.org'
-        }
+        message: 'Auto-generated commit'
       },
       src: ['**']
     },

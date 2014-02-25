@@ -3,29 +3,41 @@
     var controllerId = 'orgpage';
     angular.module('githubAdminPageApp').controller(controllerId, orgpage);
 
-    function orgpage($scope) {
+    function orgpage($scope, $http) {
       $scope.orgrepo={};
       var httpError=function(data/*, status, headers, config*/) {
-        console.log('error!', data);
+        console.log('org error!', data);
       };
       var ghParameter={};
       var getGhReport = function(data /*, status, headers, config*/) {
-        console.log('sucess!', data);
+        console.log('org sucess!', data);
         data.forEach(function(repors){
-          if (repors.open_issues !== 0) {
-            console.log('repors',repors.name);
-            $scope.repo[repors.id]={
-              id: repors.id,
-              name: repors.name,
-              url: repors.html_url,
-              open_issues: repors.open_issues,
-              open_issues_count: repors.open_issues_count
-            };
-          }
+          console.log('org repors',repors.name);
+          $scope.orgrepo[repors.id]={
+            id: repors.id,
+            title: repors.title,
+            body: repors.body,
+            url: repors.html_url,
+            open_issues: repors.open_issues,
+            open_issues_count: repors.open_issues_count
+          };
         });
       };
       $scope.$on('ghLogin', function(event, data) {
-        console.log('++++ receiveing broadcast', data);
+        ghParameter=data;
+        if(ghParameter.oauth_token) {
+          $scope.nonApiKey=false;
+          $http({
+              method: 'GET',
+              // /user/issues
+              url: 'https://api.github.com/issues',
+              params: ghParameter
+            }).
+            success(getGhReport).
+            error(httpError);
+        } else {
+          $scope.nonApiKey=true;
+        }
       });
     }
   })();

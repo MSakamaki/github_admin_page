@@ -5,6 +5,7 @@
     app.directive('myissues', function () {
         var directive = {
             restrict :'E',
+            controller: 'mypage',
             templateUrl : 'views/mypage.html'
           };
         return directive;

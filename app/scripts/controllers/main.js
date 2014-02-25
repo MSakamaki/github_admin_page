@@ -1,14 +1,13 @@
 'use strict';
 
 angular.module('githubAdminPageApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('MainCtrl', function ($scope) {
     var ghParameter={};
     $scope.ghlogin=function(){
       ghParameter.state='open';
       if ($scope.ghapptoken) {
-        ghParameter.oauth_toke=$scope.ghapptoken;
+        ghParameter.oauth_token=$scope.ghapptoken;
       }
-      console.log('AlloAllo');
       $scope.$broadcast('ghLogin', ghParameter);
     };
   });

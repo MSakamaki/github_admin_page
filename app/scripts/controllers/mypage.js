@@ -3,7 +3,7 @@
     var controllerId = 'mypage';
     angular.module('githubAdminPageApp').controller(controllerId, mypage);
 
-    function mypage($scope) {
+    function mypage($scope, $http) {
       $scope.repo={};
       $scope.issues={};
       var httpError=function(data/*, status, headers, config*/) {
@@ -20,8 +20,6 @@
               id: repors.id,
               name: repors.name,
               url: repors.html_url,
-              //issues_url: repors.issues_url,
-              //update_at: repors.update_at,
               open_issues: repors.open_issues,
               open_issues_count: repors.open_issues_count
             };
@@ -43,23 +41,15 @@
       //     $scope.issues[issues.id]=issues;
       //   });
       // };
-  /*
-      $scope.ghlogin=function(){
-        ghParameter.state='open';
-        if ($scope.ghapptoken) {
-          ghParameter.oauth_toke=$scope.ghapptoken;
-        }
+      $scope.$on('ghLogin', function(event, data) {
+        ghParameter=data;
         $http({
             method: 'GET',
-            url: 'https://api.github.com/users/' + $scope.ghuser + '/repos'
+            url: 'https://api.github.com/users/' + $scope.ghuser + '/repos',
+            params: ghParameter
           }).
           success(getGhReport).
           error(httpError);
-        $scope.$broadcast('ghLogin', ghParameter);
-      };
-  */
-      $scope.$on('ghLogin', function(event, data) {
-        console.log('++++ receiveing broadcast', data);
       });
     }
   })();

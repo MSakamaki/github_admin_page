@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     var controllerId = 'orgpage';
-    angular.module('githubAdminPageApp').controller(controllerId, orgpage);
+    angular.module('githubAdminPageApp').controller(controllerId, ['$scope','$http',orgpage]);
 
     function orgpage($scope, $http) {
       $scope.orgrepo={};

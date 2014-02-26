@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('githubAdminPageApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', ['$scope', function ($scope) {
     var ghParameter={};
     $scope.ghlogin=function(){
       ghParameter.state='open';
@@ -10,4 +10,4 @@ angular.module('githubAdminPageApp')
       }
       $scope.$broadcast('ghLogin', ghParameter);
     };
-  });
+  }]);

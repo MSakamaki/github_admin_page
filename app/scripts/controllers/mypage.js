@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     var controllerId = 'mypage';
-    angular.module('githubAdminPageApp').controller(controllerId, mypage);
+    angular.module('githubAdminPageApp').controller(controllerId, ['$scope','$http',mypage]);
 
     function mypage($scope, $http) {
       $scope.repo={};
